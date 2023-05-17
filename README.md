@@ -1,6 +1,6 @@
 # Zod Tutorial
 
-## My solutions for ![Total Typescript](https://totaltypescript.com): ![Zod Tutorial](https://www.totaltypescript.com/tutorials/zod)
+My solutions for ![Total Typescript](https://totaltypescript.com): ![Zod Tutorial](https://www.totaltypescript.com/tutorials/zod)
 
 ## Quickstart
 
