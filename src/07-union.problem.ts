@@ -5,7 +5,7 @@ import { z } from "zod";
 
 const Form = z.object({
   repoName: z.string(),
-  privacyLevel: z.string(),
+  privacyLevel: z.union([z.literal("public"), z.literal("private")]),
   //              ^ 🕵️‍♂️
 });
 

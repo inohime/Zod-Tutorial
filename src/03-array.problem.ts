@@ -7,7 +7,9 @@ const StarWarsPerson = z.object({
   name: z.string(),
 });
 
-const StarWarsPeopleResults = z.unknown();
+const StarWarsPeopleResults = z.object({
+  results: z.array(StarWarsPerson)
+})
 //                            ^ 🕵️‍♂️
 
 export const fetchStarWarsPeople = async () => {
@@ -15,9 +17,12 @@ export const fetchStarWarsPeople = async () => {
     "https://www.totaltypescript.com/swapi/people.json",
   ).then((res) => res.json());
 
-  const parsedData = StarWarsPeopleResults.parse(data);
+  // const parsedData = StarWarsPeopleResults.parse(data);
 
-  return parsedData.results;
+  // return parsedData.results;
+  
+  // same as 02
+  return StarWarsPeopleResults.parse(data).results;
 };
 
 // TESTS

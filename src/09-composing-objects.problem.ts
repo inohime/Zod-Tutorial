@@ -6,26 +6,18 @@ import { Equal, Expect } from "./helpers/type-utils";
  * while also making sure the cases don't go red!
  */
 
-const User = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
-});
+function composeSchema<T extends z.ZodRawShape>(props: T) {
+  return z.object({ id: z.string().uuid(), ...props });
+}
 
-const Post = z.object({
-  id: z.string().uuid(),
-  title: z.string(),
-  body: z.string(),
-});
-
-const Comment = z.object({
-  id: z.string().uuid(),
-  text: z.string(),
-});
+const User = composeSchema({ name: z.string() });
+const Post = composeSchema({ title: z.string(), body: z.string() });
+const Comment = composeSchema({ text: z.string() });
 
 type cases = [
   Expect<Equal<z.infer<typeof Comment>, { id: string; text: string }>>,
   Expect<
     Equal<z.infer<typeof Post>, { id: string; title: string; body: string }>
   >,
-  Expect<Equal<z.infer<typeof User>, { id: string; name: string }>>,
+  Expect<Equal<z.infer<typeof User>, { id: string; name: string }>>
 ];

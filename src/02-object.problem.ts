@@ -3,7 +3,9 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const PersonResult = z.unknown();
+const PersonResult = z.object({
+  name: z.string()
+});
 //                   ^ 🕵️‍♂️
 
 export const fetchStarWarsPersonName = async (id: string) => {
@@ -11,9 +13,12 @@ export const fetchStarWarsPersonName = async (id: string) => {
     "https://www.totaltypescript.com/swapi/people/" + id + ".json",
   ).then((res) => res.json());
 
-  const parsedData = PersonResult.parse(data);
+  // const parsedData = PersonResult.parse(data);
 
-  return parsedData.name;
+  // return parsedData.name;
+
+  // only one field is being returned, no need for the additional allocation
+  return PersonResult.parse(data).name;
 };
 
 // TESTS
